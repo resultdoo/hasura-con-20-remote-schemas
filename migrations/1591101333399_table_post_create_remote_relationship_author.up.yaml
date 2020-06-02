@@ -1,0 +1,14 @@
+- args:
+    hasura_fields:
+    - author_id
+    name: author
+    remote_field:
+      Tenzor_User:
+        arguments:
+          input:
+            id: $author_id
+    remote_schema: TENZOR
+    table:
+      name: post
+      schema: public
+  type: create_remote_relationship

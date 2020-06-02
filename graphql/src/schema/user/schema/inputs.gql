@@ -1,0 +1,9 @@
+input Tenzor_User_RegisterInput {
+    firstName: String!,
+    lastName: String!,
+    email: String!
+}
+
+input Tenzor_User_FetchInput {
+    id: String!
+}

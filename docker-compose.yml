@@ -1,0 +1,100 @@
+version: '3'
+services:
+  ############### Application containers ###############
+
+  # Hasura
+  hasuracon20_result_hasura:
+    image: hasura/graphql-engine:pull2395-eb045d9b
+    ports:
+    - "8001:8080"
+    depends_on:
+    - "postgres-db"
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:@hasuracon20_result_postgre:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ADMIN_SECRET: hasuracon20-result
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
+      HASURACON20_RESULT_GRAPHQL_URL: "http://hasuracon20_result_graphql_server:8080/graphql"
+    expose:
+      - 8001
+    networks:
+      hasura-con-20-result:
+        aliases:
+          - hasuracon20_result_hasura
+
+  # Apollo Server
+  hasuracon20_result_graphql_server:
+    image: hasuracon20_result_graphql_server
+    build: 
+      context: ./graphql
+      dockerfile: Dockerfile
+    expose:
+      - 8080
+    ports:
+      - 81:8080
+    volumes:
+      - ./graphql/src:/usr/src/app/src
+      - ./graphql/config:/usr/src/app/config
+    networks:
+      hasura-con-20-result:
+        aliases:
+          - hasuracon20_result_graphql_server
+  
+  # User service on NodeJS
+  hasuracon20_result_user_service:
+    image: hasuracon20_result_user_service
+    build: 
+      context: ./service
+      dockerfile: Dockerfile
+    expose:
+      - 8080
+    ports:
+      - 82:8080
+    volumes:
+      - ./service/src:/usr/src/app/src
+      - ./service/config:/usr/src/app/config
+    networks:
+      hasura-con-20-result:
+        aliases:
+          - hasuracon20_result_user_service
+  
+  ############### End ###############
+
+  ############### Support containers ###############
+
+  # Mongo storage database - exported on port 92
+  mongo:
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 92:27017
+    volumes:
+      - ./mongo-db:/data/db
+    networks:
+      hasura-con-20-result:
+        aliases:
+          - hasuracon20_result_mongo
+
+  # Hasura database
+  postgres-db:
+    image: postgres:11.5
+    restart: always
+    volumes:
+    - ./db_data:/var/lib/postgresql/data
+    ports:
+    - 5432:5432
+    networks:
+      hasura-con-20-result:
+        aliases:
+          - hasuracon20_result_postgre
+    command: postgres -c max_locks_per_transaction=2000
+                  
+  ############### End ###############
+
+networks:
+  hasura-con-20-result:
+    external:
+      name: hasuracon20-result

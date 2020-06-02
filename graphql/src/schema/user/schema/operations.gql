@@ -1,0 +1,7 @@
+type Query {
+    Tenzor_User( input: Tenzor_User_FetchInput ): Tenzor_User
+}
+
+type Mutation {
+    Tenzor_User_Register( input: Tenzor_User_RegisterInput ): Tenzor_User
+}

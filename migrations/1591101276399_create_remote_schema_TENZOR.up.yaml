@@ -1,0 +1,8 @@
+- args:
+    definition:
+      forward_client_headers: true
+      headers: []
+      timeout_seconds: 60
+      url_from_env: HASURACON20_RESULT_GRAPHQL_URL
+    name: TENZOR
+  type: add_remote_schema

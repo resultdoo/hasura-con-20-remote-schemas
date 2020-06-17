@@ -4,7 +4,7 @@ services:
 
   # Hasura
   hasuracon20_result_hasura:
-    image: hasura/graphql-engine:pull2395-eb045d9b
+    image: hasura/graphql-engine:v1.3.0-beta.1
     ports:
     - "8001:8080"
     depends_on:

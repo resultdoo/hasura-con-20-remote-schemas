@@ -24,9 +24,10 @@ Before running the up command.
 When the project is running, run the Hasura migrations from the console:
 
 ```bash
-./hasura-console.dms migrate apply --admin-secret hasuracon20-result
+hasura migrate apply --admin-secret hasuracon20-result
+hasura metadata apply --admin-secret hasuracon20-result
 ```
 
-(or hasura-console-linux for Linux)
+Make sure your Hasura CLI version is v1.3.0-beta.1.
 
-**NOTE: This is a prototype project with a Hasura build in progress. It is not meant to be run in production fully yet. Wait for the 1.3 beta version for any production use.**
+**NOTE: This is a prototype project with a Hasura build in progress. It is not meant to be run in production fully yet.**

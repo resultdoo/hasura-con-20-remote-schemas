@@ -1,7 +1,7 @@
 {
-	"name": "fri-graphql-blog-service",
+	"name": "hasura-con-20-service",
 	"version": "1.0.0",
-	"description": "FRI GraphQL Blog Service",
+	"description": "Hasura Con 20 Demo Service",
 	"main": "main.js",
 	"scripts": {
 		"build": "./node_modules/.bin/babel src --out-dir dist",
@@ -11,7 +11,7 @@
 		"test": "NODE_ENV=test jest --env=jsdom"
 	},
 	"author": "Bostjan Cigan",
-	"license": "MIT",
+	"license": "GPL-2.0-only",
 	"dependencies": {
 		"body-parser": "^1.19.0",
 		"config": "^3.2.2",

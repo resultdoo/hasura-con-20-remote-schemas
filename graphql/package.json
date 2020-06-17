@@ -10,7 +10,7 @@
     },
     "keywords": [],
     "author": "Bostjan Cigan",
-    "license": "",
+    "license": "GPL-2.0-only",
     "dependencies": {
         "apollo-datasource-rest": "^0.8.1",
         "apollo-server": "^2.9.4",

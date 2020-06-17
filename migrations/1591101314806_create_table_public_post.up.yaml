@@ -1,9 +1,0 @@
-- args:
-    sql: CREATE TABLE "public"."post"("id" bigserial NOT NULL, "content" text NOT
-      NULL, "author_id" varchar NOT NULL, PRIMARY KEY ("id") ); COMMENT ON TABLE "public"."post"
-      IS E'This is a posts table for our blog.';
-  type: run_sql
-- args:
-    name: post
-    schema: public
-  type: add_existing_table_or_view

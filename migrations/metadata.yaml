@@ -1,0 +1,22 @@
+version: 2
+tables:
+- table:
+    schema: public
+    name: post
+  remote_relationships:
+  - definition:
+      remote_field:
+        Tenzor_User:
+          arguments:
+            input:
+              id: $author_id
+      hasura_fields:
+      - author_id
+      remote_schema: TENZOR
+    name: author
+remote_schemas:
+- name: TENZOR
+  definition:
+    url_from_env: HASURACON20_RESULT_GRAPHQL_URL
+    timeout_seconds: 60
+    forward_client_headers: true
